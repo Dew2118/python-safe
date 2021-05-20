@@ -19,11 +19,12 @@ class Card:
         return self.value
 
     def get_count(self):
-        if self.score <= 6:
-            return 1
-        elif self.score <= 9:
-            return 0
-        return -1
+        return 1 if self.score <= 6 else 0 if self.score <= 9 else -1
+        # if self.score <= 6:
+        #     return 1
+        # elif self.score <= 9:
+        #     return 0
+        # return -1
     def __eq__(self, other):
         return (other != None) and (self.value == other. get_value()) and \
             (self.suit == other.get_suit()) 
