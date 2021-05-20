@@ -212,6 +212,12 @@ def test_Hand_equal():
     comparing_object = Hand(player_object, 'None')
     assert hand_object == comparing_object
 
+def test_get_counter():
+    player_object  = Player('Player')
+    assert player_object.get_counter() == 1
+    assert player_object.get_counter() == 2
+    assert player_object.get_counter() == 3
+
 def test_get_name():
     player_object  = Player('Player1')
     assert player_object.get_name() == 'Player1' 
