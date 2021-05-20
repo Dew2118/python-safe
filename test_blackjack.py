@@ -53,6 +53,8 @@ def test_draw():
     # print(deck_object.draw(4))
     assert all([a==b for a,b in zip(deck_object.draw(4), [Card('A','C'), Card('A','H'), Card('A','S'), Card('A','D')])])
     
+def test_get_deck_left():
+    assert Deck().get_deck_left() == 52
 def test_shuffle():
     deck_object = Deck()
     value = map(str, ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'])
