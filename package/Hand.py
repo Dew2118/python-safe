@@ -120,10 +120,13 @@ class Hand:
         self.display_text(self.name, '', 0)
 
     def display_one_card(self):
-        self.display_object.display_card(0, 1, self.cards[0])
-        self.card_count = 2
-        self.already_displayed.append(self.cards[0])
-        self.display_object.display_card_skeleton(0, 14)
+        if len(self.cards) >= 2:
+            self.display_object.display_card(0, 1, self.cards[0])
+            self.card_count = 2
+            self.already_displayed.append(self.cards[0])
+            self.display_object.display_card_skeleton(0, 14)
+        else:
+            return 'break'
 
     def play(self, deck, game):
         if self.name == 'dealer':
@@ -145,6 +148,8 @@ class Hand:
             b = self.display_object.getstr(35, 14)
             draw_or_not = b.decode('utf-8')
             self.display_object.display_text(35, 14, ' ')
+            if deck.get_deck_left() == 0:
+                break
             if draw_or_not == 'y':
                 self.draw(deck, 1)
             if draw_or_not == 'd':

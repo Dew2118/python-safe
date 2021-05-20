@@ -38,7 +38,10 @@ class Game:
             # initialize both players
             player1, player1_hand = self.initialize_player('player1')
             dealer, dealer_hand = self.initialize_player('dealer')
-            dealer_hand.display_one_card()
+            result = None
+            result = dealer_hand.display_one_card()
+            if result == 'break':
+                break
             player1_hand.display()
             # play both players
             for player in self.players:

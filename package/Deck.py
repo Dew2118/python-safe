@@ -20,11 +20,10 @@ class Deck:
         return len(self.cards)
 
     def draw(self, number_of_cards):
-        if self.cards:
+        if len(self.cards) >= number_of_cards:
             draw = [self.cards.pop(0) for c in range(number_of_cards)]
             self.drawn.extend(draw)
-            return draw
-        return [] 
+            return draw 
 
     def update_count(self):
         return sum([card.get_count() for card in self.drawn])
