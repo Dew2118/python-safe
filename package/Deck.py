@@ -6,7 +6,11 @@ class Deck:
     def __init__(self):
         value = map(str, ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'])
         suit = ['C', 'H', 'S', 'D']
-        self.cards = [Card(v, s) for v in value for s in suit]
+        a_deck = [Card(v, s) for v in value for s in suit]
+        self.cards = []
+        for c in a_deck:
+            for a in range(4):
+                self.cards.append(c)
         # keep list of drawn cards
         self.drawn = []
     

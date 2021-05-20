@@ -1,5 +1,6 @@
 import curses
 
+
 class Display:
     SUIT_CHR = {'S': '\u2660', 'H': '\u2665', 'D': '\u2666', 'C': '\u2663'}
 
@@ -61,4 +62,4 @@ class Display:
         self.refresh()
 
     def display_count(self, num):
-        self.display_text(0,40,f'Running count is: {num}  ')
+        self.display_text(38 ,0 ,f'Running count is: {num} and True count is {num // 4} ')
