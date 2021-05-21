@@ -35,7 +35,7 @@ class Hand:
         if self.name != 'dealer':
             dealer_hand = game.get_player('dealer').get_hand()
             neg = dealer_hand.cards[1].get_count()
-        self.display_object.display_count(deck.update_count() - neg)
+        self.display_object.display_count(deck.update_count() - neg, deck.get_deck())
 
     def draw(self, deck, number_of_cards):
         self.cards.extend(deck.draw(number_of_cards))
@@ -163,6 +163,7 @@ class Hand:
         self.display()
         self.clear_arrow()
         self.is_blackjack()
+        
     def make_card(self, card):
         self.cards = [card]
 

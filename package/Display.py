@@ -61,5 +61,5 @@ class Display:
         self.stdscr.clear()
         self.refresh()
 
-    def display_count(self, num):
-        self.display_text(38 ,0 ,f'Running count is: {num} and True count is {num // 4} ')
+    def display_count(self, num, deck):
+        self.display_text(38 ,0 ,f'Running count is: {num} and True count is {round(num / (len(deck) / 52), 2)}  ')
