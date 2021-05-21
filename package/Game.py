@@ -37,7 +37,7 @@ class Game:
         while self.deck.get_deck_left() > 0:
             # initialize both players
             player1, player1_hand = self.initialize_player('player1')
-            dealer, dealer_hand = self.initialize_player('dealer')
+            _, dealer_hand = self.initialize_player('dealer')
             result = None
             result = dealer_hand.display_one_card()
             if result == 'break':

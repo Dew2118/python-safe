@@ -9,7 +9,7 @@ class Deck:
         a_deck = [Card(v, s) for v in value for s in suit]
         self.cards = []
         for c in a_deck:
-            for a in range(4):
+            for _ in range(4):
                 self.cards.append(c)
         # keep list of drawn cards
         self.drawn = []

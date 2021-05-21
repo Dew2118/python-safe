@@ -8,7 +8,8 @@ from package.Player import Player
 from package.Game import Game
 
 
-# assert True == False
+#Test Card
+
 def test_get_value():
     card_object = Card('K','S')
     assert card_object.get_value() == 'K'
@@ -48,6 +49,8 @@ def test_compare_card():
     assert Card('K','S') != Card('Q','S')
     assert Card('K','S') != Card('K','C')
 
+#Test Deck
+
 def test_draw():
     deck_object = Deck()
     # print(deck_object.draw(4))
@@ -65,6 +68,17 @@ def test_shuffle():
     assert all([a==b for a,b in zip(deck_object.get_deck(), cards)])
     deck_object.shuffle()
     assert not all([a==b for a,b in zip(deck_object.get_deck(), cards)])
+
+def test_update_count():
+    deck  = Deck()
+    deck.drawn = [Card('A','S'), Card('7','S')]
+    assert deck.update_count() == -1
+    deck.drawn = [Card('A','S'), Card('3','S')]
+    assert deck.update_count() == 0
+    deck.drawn = [Card('4','S'), Card('7','S')]
+    assert deck.update_count() == 1
+
+#test Hand
 
 def test_get_player():
     player_object = Player('Player1')
@@ -94,15 +108,6 @@ def test_Player_get_score():
     assert hand_object.get_score() == 21
     hand_object.cards = [Card('A','S'), Card('10','S'), Card('A','C')]
     assert hand_object.get_score() == 12
-
-def test_update_count():
-    deck  = Deck()
-    deck.drawn = [Card('A','S'), Card('7','S')]
-    assert deck.update_count() == -1
-    deck.drawn = [Card('A','S'), Card('3','S')]
-    assert deck.update_count() == 0
-    deck.drawn = [Card('4','S'), Card('7','S')]
-    assert deck.update_count() == 1
 
 def test_self_name():
     assert Hand('player_object', 'display_object', 'name').name == 'name'
@@ -212,6 +217,8 @@ def test_Hand_equal():
     comparing_object = Hand(player_object, 'None')
     assert hand_object == comparing_object
 
+#Test Player
+
 def test_get_counter():
     player_object  = Player('Player')
     assert player_object.get_counter() == 1
@@ -255,6 +262,8 @@ def test_equal_Player():
     player_object = Player('Player1')
     comparing_object = Player('Player1')
     assert player_object == comparing_object
+
+#Test Game
 
 def test_get_display():
     game_object = Game('stdscr')
