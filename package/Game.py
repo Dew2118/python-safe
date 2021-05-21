@@ -1,17 +1,17 @@
 from .Display import display_object
-from .Deck import Deck
+from .Shoe import Shoe
 from .Player import Player
 from time import sleep
 
 
 class Game:
     def __init__(self):
-        self.deck = Deck()
-        self.deck.shuffle()
+        self.shoe = Shoe(4)
+        self.shoe.shuffle()
         self.players = []
 
     def get_deck(self):
-        return self.deck
+        return self.shoe
 
     def get_display(self):
         return display_object
@@ -29,11 +29,11 @@ class Game:
     def initialize_player(self, player_name):
         a_player = self.create_player(player_name)
         a_player_hand = a_player.create_hand()
-        a_player_hand.draw(self.deck, 2)
+        a_player_hand.draw(self.shoe, 2)
         return a_player, a_player_hand
 
     def play(self):
-        while self.deck.get_deck_left() > 0:
+        while self.shoe.get_deck_left() > 0:
             # initialize both players
             player1, player1_hand = self.initialize_player('player1')
             _, dealer_hand = self.initialize_player('dealer')
@@ -44,7 +44,7 @@ class Game:
             player1_hand.display()
             # play both players
             for player in self.players:
-                player.play(self.deck, self)
+                player.play(self.shoe, self)
             # decide result by comparing dealer hand with each player's hand
             for self.number, hand in enumerate(player1.get_all_hands()):
                 display_object.display_decide(self.number, f'Result for {hand.get_name()}')

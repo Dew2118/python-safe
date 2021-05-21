@@ -62,8 +62,8 @@ class Display:
         self.stdscr.clear()
         self.refresh()
 
-    def display_count(self, num, deck):
-        self.display_text(38 ,0 ,f'Running count is: {num} and True count is {round(num / (len(deck) / 52), 2)}  ')
+    def display_count(self, num, shoe):
+        self.display_text(38 ,0 ,f'Running count is: {num} and True count is {round(num / (len(shoe) / 52), 2)}  ')
 
 
 display_object = curses.wrapper(Display)
