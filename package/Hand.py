@@ -1,5 +1,8 @@
+from .Display import display_object
+
+
 class Hand:
-    def __init__(self, player, display, name = None):
+    def __init__(self, player, name = None):
         self.cards = []
         self.player = player
         if type(name) == str:
@@ -7,7 +10,6 @@ class Hand:
         else:
             self.name = self.player.get_name()
         self.card_count = 1
-        self.display_object = display
         self.already_displayed = []
 
     def display_text(self, text1, text2, plus):
@@ -17,12 +19,12 @@ class Hand:
         self.display_text_formula('sp2', text1, text2, plus, 21)
         self.display_text_formula('sp3', text1, text2, plus, 28)
         if __name__ == '__main__':
-            self.display_object.refresh()
+            display_object.refresh()
 
     def display_text_formula(self, compare_text, text1, text2, plus, times):
         if self.name == compare_text:
-            self.display_object.display_text_with_y(plus + times, text1)
-            self.display_object.display_text_with_y(plus + 1 +  times, text2)
+            display_object.display_text_with_y(plus + times, text1)
+            display_object.display_text_with_y(plus + 1 +  times, text2)
 
     def get_player(self):
         return self.player
@@ -35,7 +37,7 @@ class Hand:
         if self.name != 'dealer':
             dealer_hand = game.get_player('dealer').get_hand()
             neg = dealer_hand.cards[1].get_count()
-        self.display_object.display_count(deck.update_count() - neg, deck.get_deck())
+        display_object.display_count(deck.update_count() - neg, deck.get_deck())
 
     def draw(self, deck, number_of_cards):
         self.cards.extend(deck.draw(number_of_cards))
@@ -75,13 +77,13 @@ class Hand:
     def display_and_replace(self, y):
         self.card_count = 2
         self.already_displayed.append(self.cards[0])
-        self.display_object.display_card_skeleton(y, 14, ' ')
-        self.display_object.clear_card_symbol(y, 14, self.cards[1])
+        display_object.display_card_skeleton(y, 14, ' ')
+        display_object.clear_card_symbol(y, 14, self.cards[1])
 
     def arrow(self, y):
         for x in range(6):
-            self.display_object.display_text(y, x, '-')
-        self.display_object.display_text(y, 6, '>')
+            display_object.display_text(y, x, '-')
+        display_object.display_text(y, 6, '>')
 
     def display(self):
         if self.name == 'dealer':
@@ -104,7 +106,7 @@ class Hand:
     def display_formula(self, a):
         for c in self.cards:
             if not self.check_in_list(self.already_displayed, c):
-                self.display_object.display_card(a, self.card_count, c)
+                display_object.display_card(a, self.card_count, c)
                 self.card_count += 1
         for b in self.cards:
             self.already_displayed.append(b)
@@ -114,17 +116,17 @@ class Hand:
         y_list = [3, 10, 17, 24, 32]
         for y in y_list:
             for x in range(7):
-                self.display_object.display_text(y, x, ' ')
+                display_object.display_text(y, x, ' ')
 
     def show_player(self):
         self.display_text(self.name, '', 0)
 
     def display_one_card(self):
         if len(self.cards) >= 2:
-            self.display_object.display_card(0, 1, self.cards[0])
+            display_object.display_card(0, 1, self.cards[0])
             self.card_count = 2
             self.already_displayed.append(self.cards[0])
-            self.display_object.display_card_skeleton(0, 14)
+            display_object.display_card_skeleton(0, 14)
         else:
             return 'break'
 
@@ -143,11 +145,11 @@ class Hand:
         while not (self.is_busted()) and not (self.is_blackjack()):
             self.display_running_count(deck, game)
             self.display()
-            self.display_object.display_text_times_seven(5, 'want to draw?')
+            display_object.display_text_times_seven(5, 'want to draw?')
             self.get_score()
-            b = self.display_object.getstr(35, 14)
+            b = display_object.getstr(35, 14)
             draw_or_not = b.decode('utf-8')
-            self.display_object.display_text(35, 14, ' ')
+            display_object.display_text(35, 14, ' ')
             if deck.get_deck_left() == 0:
                 break
             if draw_or_not == 'y':
@@ -173,7 +175,7 @@ class Hand:
     def split(self):
         if not self.splittable():
             return
-        new_hand = Hand(self.player, self.display_object, 'sp' + str(self.player.get_counter()))
+        new_hand = Hand(self.player, 'sp' + str(self.player.get_counter()))
         if self.name == 'dealer':
             self.display_and_replace(0)
         elif self.name == 'player1':
@@ -212,4 +214,4 @@ class Hand:
             return 'Tie'
 
     def __eq__(self, other):
-        return (self.name == other.name) and (self.player == other.player) and (self.display_object == other.display_object)
+        return (self.name == other.name) and (self.player == other.player)

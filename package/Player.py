@@ -16,8 +16,8 @@ class Player:
         self.counter += 1
         return self.counter
 
-    def create_hand(self, display):
-        a_hand = Hand(self, display)
+    def create_hand(self):
+        a_hand = Hand(self)
         self.hands.append(a_hand)
         return a_hand
 

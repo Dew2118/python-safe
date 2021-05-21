@@ -6,6 +6,7 @@ class Display:
 
     def __init__(self, stdscr):
         self.stdscr = stdscr
+        curses.echo()
 
     def display_card_skeleton(self, y, x, symbol='#'):
         for a in range(6):
@@ -63,3 +64,6 @@ class Display:
 
     def display_count(self, num, deck):
         self.display_text(38 ,0 ,f'Running count is: {num} and True count is {round(num / (len(deck) / 52), 2)}  ')
+
+
+display_object = curses.wrapper(Display)

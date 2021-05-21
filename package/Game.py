@@ -1,12 +1,11 @@
-from .Display import Display
+from .Display import display_object
 from .Deck import Deck
 from .Player import Player
 from time import sleep
 
 
 class Game:
-    def __init__(self, stdscr):
-        self.display_object = Display(stdscr)
+    def __init__(self):
         self.deck = Deck()
         self.deck.shuffle()
         self.players = []
@@ -15,7 +14,7 @@ class Game:
         return self.deck
 
     def get_display(self):
-        return self.display_object
+        return display_object
 
     def create_player(self, player_name):
         a_player = Player(player_name)
@@ -29,7 +28,7 @@ class Game:
 
     def initialize_player(self, player_name):
         a_player = self.create_player(player_name)
-        a_player_hand = a_player.create_hand(self.display_object)
+        a_player_hand = a_player.create_hand()
         a_player_hand.draw(self.deck, 2)
         return a_player, a_player_hand
 
@@ -48,11 +47,11 @@ class Game:
                 player.play(self.deck, self)
             # decide result by comparing dealer hand with each player's hand
             for self.number, hand in enumerate(player1.get_all_hands()):
-                self.display_object.display_decide(self.number, f'Result for {hand.get_name()}')
+                display_object.display_decide(self.number, f'Result for {hand.get_name()}')
                 self.decide(dealer_hand, hand)
             sleep(3)
-            self.display_object.clear()
+            display_object.clear()
             self.players = []
 
     def decide(self, h1, h2):
-        self.display_object.display_decide(self.number, f'{h1.decide(h2)}', 1)
+        display_object.display_decide(self.number, f'{h1.decide(h2)}', 1)
